@@ -1,0 +1,442 @@
+const express = require('express');
+const path = require('path');
+const nodemailer = require('nodemailer');
+const cors = require('cors');
+const rateLimit = require('express-rate-limit');
+const session = require('express-session');
+const MongoStore = require('connect-mongo');
+require('dotenv').config();
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+// Rate limiting
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100 // limit each IP to 100 requests per windowMs
+});
+
+app.use(limiter);
+app.use(cors({
+  origin: process.env.ALLOWED_ORIGINS?.split(',') || [process.env.BASE_URL || 'http://localhost:3000'],
+  credentials: true
+}));
+
+// Session configuration
+const sessionConfig = {
+  secret: process.env.SESSION_SECRET || 'your-super-secret-key-change-this',
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    secure: process.env.NODE_ENV === 'production', // Set to true if using HTTPS in production
+    httpOnly: true,
+    maxAge: 24 * 60 * 60 * 1000 // 24 hours
+  },
+  name: 'portfolio_session' // Custom session cookie name
+};
+
+// Use MongoDB for session storage in production, memory store for development
+if (process.env.MONGODB_URI) {
+  sessionConfig.store = MongoStore.create({
+    mongoUrl: process.env.MONGODB_URI,
+    collectionName: 'sessions'
+  });
+}
+
+app.use(session(sessionConfig));
+
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+app.use(express.static(path.join(__dirname)));
+
+// Middleware for logging
+app.use((req, res, next) => {
+  console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
+  next();
+});
+
+// Routes
+// Serve the main HTML file
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+// API endpoint for portfolio data
+app.get('/api/portfolio', (req, res) => {
+  const portfolioData = {
+    name: 'Tuyishime Martin',
+    title: 'Web Developer & AI/ML Engineer',
+    email: 'tuyishimemartin007@gmail.com',
+    location: 'Lilongwe, Malawi',
+    bio: 'I\'m a passionate developer with expertise in building modern web applications and implementing cutting-edge AI/ML solutions. With a strong foundation in computer science and years of experience, I bring ideas to life with elegant, efficient code.',
+    about: 'My approach combines technical excellence with creative problem-solving. I specialize in developing scalable web solutions and leveraging artificial intelligence to solve complex real-world challenges.',
+    socialMedia: {
+      linkedin: 'https://www.linkedin.com/in/tuyishime-martin-04532932a',
+      github: 'https://github.com/tuyishime812',
+      twitter: 'https://x.com/Tuyishimecrypto',
+      facebook: 'https://www.facebook.com/profile.php?id=100086219627900'
+    },
+    projects: [
+      {
+        id: 1,
+        name: 'Mlimi Smart',
+        description: 'An intelligent digital agriculture platform that empowers smallholder farmers with real-time information, advisory services, and market opportunities using AI-driven tools.',
+        technologies: ['Python', 'TensorFlow', 'PyTorch', 'TypeScript', 'TailwindCSS'],
+        image: './mlimi-smart.png',
+        category: 'AI/ML',
+        github: '#',
+        live: 'https://mlimi-smart1.vercel.app/'
+      },
+      {
+        id: 2,
+        name: 'E-Commerce Platform',
+        description: 'A full-stack e-commerce solution with payment processing and inventory management.',
+        technologies: ['JavaScript', 'Node.js', 'MongoDB', 'React'],
+        image: 'https://placehold.co/600x400/8b5cf6/white?text=Web+App',
+        category: 'Web Development',
+        github: '#',
+        live: '#'
+      },
+      {
+        id: 3,
+        name: 'Virtual Story Generator',
+        description: 'An AI-powered platform that creates personalized stories supporting multiple languages including Swahili, Chichewa, Kinyarwanda, Yao, and English.',
+        technologies: ['Python', 'JavaScript', 'AI/ML'],
+        image: './Virtula_story.png',
+        category: 'AI/ML',
+        github: '#',
+        live: 'https://virtual-story-generator.vercel.app/'
+      },
+      {
+        id: 4,
+        name: 'Data Visualization Dashboard',
+        description: 'Interactive dashboard for visualizing complex datasets with advanced analytics.',
+        technologies: ['Python', 'D3.js', 'React', 'FastAPI'],
+        image: 'https://placehold.co/600x400/10b981/white?text=Data+Viz',
+        category: 'Data Science',
+        github: '#',
+        live: '#'
+      }
+    ],
+    skills: {
+      technical: [
+        { name: 'Web Development', level: 56, category: 'Frontend/Backend' },
+        { name: 'JavaScript/React', level: 60, category: 'Frontend' },
+        { name: 'Python/AI/ML', level: 42, category: 'AI/ML' },
+        { name: 'Cloud Services', level: 70, category: 'DevOps' },
+        { name: 'UI/UX Design', level: 65, category: 'Design' }
+      ],
+      professional: [
+        { name: 'Problem Solving', level: 70 },
+        { name: 'Communication', level: 85 },
+        { name: 'Innovation', level: 92 },
+        { name: 'Leadership', level: 75 }
+      ]
+    },
+    experience: [
+      {
+        title: 'Senior Web Developer',
+        company: 'Tech Solutions Inc.',
+        period: '2022 - Present',
+        description: 'Led development of scalable web applications for enterprise clients.'
+      },
+      {
+        title: 'AI/ML Engineer',
+        company: 'Data Insights Co.',
+        period: '2020 - 2022',
+        description: 'Developed machine learning models for predictive analytics.'
+      },
+      {
+        title: 'Full Stack Developer',
+        company: 'StartUp Ventures',
+        period: '2018 - 2020',
+        description: 'Built and maintained web applications using modern technologies.'
+      }
+    ],
+    education: [
+      {
+        degree: 'MSc in Computer Science',
+        institution: 'University of Technology',
+        year: '2018'
+      },
+      {
+        degree: 'BSc in Software Engineering',
+        institution: 'State University',
+        year: '2016'
+      }
+    ],
+    services: [
+      'Web Development',
+      'AI/ML Solutions',
+      'Data Analytics',
+      'Consulting',
+      'UI/UX Design',
+      'Technical Writing'
+    ],
+  };
+
+  res.json(portfolioData);
+});
+
+// API endpoint for projects only
+app.get('/api/projects', (req, res) => {
+  // Return only projects from the portfolio data
+  const portfolioData = require('./server').getPortfolioData();
+  res.json(portfolioData.projects);
+});
+
+// Contact form endpoint
+app.post('/api/contact', async (req, res) => {
+  const { name, email, subject, message } = req.body;
+
+  // Validate required fields
+  if (!name || !email || !subject || !message) {
+    return res.status(400).json({ 
+      error: 'All fields are required' 
+    });
+  }
+
+  // Basic email validation regex
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    return res.status(400).json({ 
+      error: 'Please provide a valid email address' 
+    });
+  }
+
+  // Validate message length
+  if (message.length < 10) {
+    return res.status(400).json({ 
+      error: 'Message should be at least 10 characters long' 
+    });
+  }
+
+  try {
+    // Create transporter object using Gmail service
+    const transporter = nodemailer.createTransporter({
+      service: 'gmail',
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS // Use app password for security
+      }
+    });
+
+    // Verify transporter configuration
+    await transporter.verify();
+
+    // Email options
+    const mailOptions = {
+      from: `"${name}" <${email}>`, // Sender address
+      to: process.env.EMAIL_USER, // Your email
+      replyTo: email, // Reply to the sender
+      subject: `Portfolio Contact Form: ${subject}`,
+      text: `Name: ${name}\nEmail: ${email}\nSubject: ${subject}\n\nMessage:\n${message}`,
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          <h2 style="color: #3b82f6;">New Portfolio Contact Form Submission</h2>
+          <div style="background-color: #f9fafb; padding: 20px; border-radius: 8px; margin: 20px 0;">
+            <p><strong>Name:</strong> ${name}</p>
+            <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
+            <p><strong>Subject:</strong> ${subject}</p>
+          </div>
+          <div style="background-color: #eef2ff; padding: 20px; border-radius: 8px;">
+            <h3 style="color: #4f46e5;">Message:</h3>
+            <p>${message.replace(/\n/g, '<br>')}</p>
+          </div>
+          <hr style="margin: 20px 0; border: none; height: 1px; background-color: #e5e7eb;">
+          <p style="color: #6b7280; font-size: 14px;">
+            This email was sent from your portfolio website contact form.
+          </p>
+        </div>
+      `
+    };
+
+    // Send email
+    const info = await transporter.sendMail(mailOptions);
+    console.log('Email sent: ' + info.response);
+
+    res.status(200).json({ 
+      message: 'Message sent successfully! I will get back to you soon.' 
+    });
+  } catch (error) {
+    console.error('Error sending email:', error);
+    
+    // Check for common error types
+    if (error.responseCode === 535) {
+      return res.status(500).json({ 
+        error: 'Authentication failed. Please check your email credentials.' 
+      });
+    }
+    
+    if (error.responseCode === 553 || error.responseCode === 501) {
+      return res.status(500).json({ 
+        error: 'Invalid email address. Please check the recipient address.' 
+      });
+    }
+
+    res.status(500).json({ 
+      error: 'Failed to send message. Please try again later or contact me directly.' 
+    });
+  }
+});
+
+// Health check endpoint
+app.get('/api/health', (req, res) => {
+  res.status(200).json({
+    status: 'OK',
+    timestamp: new Date().toISOString(),
+    uptime: process.uptime()
+  });
+});
+
+// CV download endpoint
+app.get('/api/cv', (req, res) => {
+  // In a real implementation, you would serve an actual CV file
+  // For now, we'll send a mock response that would trigger a download
+
+  res.status(200).json({
+    message: 'CV download endpoint',
+    available: true,
+    lastUpdated: new Date().toISOString()
+  });
+});
+
+// Serve CV file (uncomment and update path when you have an actual CV file)
+// app.get('/cv', (req, res) => {
+//   res.download(path.join(__dirname, 'CV_Tuyishime_Martin.pdf'), 'Tuyishime_Martin_CV.pdf');
+// });
+
+// 404 handler
+app.use('*', (req, res) => {
+  res.status(404).json({ 
+    error: 'Route not found',
+    message: 'The requested resource does not exist.'
+  });
+});
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error('Error:', err);
+  res.status(500).json({ 
+    error: 'Something went wrong!',
+    message: process.env.NODE_ENV === 'development' ? err.message : 'Internal server error'
+  });
+});
+
+const server = app.listen(PORT, () => {
+  console.log(`\n martin's Portfolio Server is running on http://localhost:${PORT}`);
+  console.log(`✓ Server time: ${new Date().toISOString()}`);
+  console.log(`✓ Environment: ${process.env.NODE_ENV || 'development'}`);
+  console.log(`✓ Rate limiting: 100 requests per 15 minutes`);
+  console.log('✓ Ready to connect!\n');
+});
+
+// Handle graceful shutdown
+process.on('SIGTERM', () => {
+  console.log('SIGTERM received, shutting down gracefully');
+  server.close(() => {
+    console.log('Process terminated');
+  });
+});
+
+process.on('SIGINT', () => {
+  console.log('SIGINT received, shutting down gracefully');
+  server.close(() => {
+    console.log('Process terminated');
+  });
+});
+
+// Analytics tracking
+const analyticsData = {
+  visitors: [],
+  pageViews: [],
+  chatInteractions: [],
+  contactFormSubmissions: []
+};
+
+// Middleware to track visits
+app.use((req, res, next) => {
+  const visitorInfo = {
+    id: req.sessionID || Date.now(),
+    ip: req.ip,
+    userAgent: req.get('User-Agent'),
+    timestamp: new Date().toISOString(),
+    url: req.url,
+    method: req.method
+  };
+
+  analyticsData.visitors.push(visitorInfo);
+  analyticsData.pageViews.push({
+    ...visitorInfo,
+    path: req.path
+  });
+
+  console.log(`Analytics: ${req.method} ${req.url} from ${req.ip}`);
+  next();
+});
+
+// API endpoint for analytics (protected, for your own use)
+app.get('/api/analytics', (req, res) => {
+  // In a real implementation, you would add authentication here
+  res.json({
+    totalVisitors: analyticsData.visitors.length,
+    totalPageViews: analyticsData.pageViews.length,
+    uniqueVisitors: [...new Set(analyticsData.visitors.map(v => v.ip))].length,
+    recentVisits: analyticsData.visitors.slice(-10) // Last 10 visits
+  });
+});
+
+// Export for potential use in tests
+module.exports = { app, server, getPortfolioData: () => {
+  return {
+    name: 'Tuyishime Martin',
+    title: 'Web Developer & AI/ML Engineer',
+    email: 'tuyishimemartin007@gmail.com',
+    location: 'Lilongwe, Malawi',
+    socialMedia: {
+      linkedin: 'https://www.linkedin.com/in/tuyishime-martin-04532932a',
+      github: 'https://github.com/tuyishime812',
+      twitter: 'https://x.com/Tuyishimecrypto',
+      facebook: 'https://www.facebook.com/profile.php?id=100086219627900'
+    },
+    projects: [
+      {
+        id: 1,
+        name: 'AI-Powered Analytics Platform',
+        description: 'A machine learning platform that analyzes user behavior and provides predictive insights.',
+        technologies: ['Python', 'TensorFlow', 'React'],
+        image: 'https://placehold.co/600x400/3b82f6/white?text=AI+Project'
+      },
+      {
+        id: 2,
+        name: 'E-Commerce Platform',
+        description: 'A full-stack e-commerce solution with payment processing and inventory management.',
+        technologies: ['JavaScript', 'Node.js', 'MongoDB'],
+        image: 'https://placehold.co/600x400/8b5cf6/white?text=Web+App'
+      },
+      {
+        id: 3,
+        name: 'Computer Vision System',
+        description: 'Real-time object detection system using deep learning algorithms.',
+        technologies: ['Python', 'OpenCV', 'PyTorch'],
+        image: 'https://placehold.co/600x400/0ea5e9/white?text=ML+Project'
+      }
+    ],
+    skills: {
+      technical: [
+        { name: 'Web Development', level: 90 },
+        { name: 'JavaScript/React', level: 85 },
+        { name: 'Python/AI/ML', level: 95 },
+        { name: 'Node.js', level: 80 },
+        { name: 'Database Design', level: 75 }
+      ],
+      professional: [
+        { name: 'Problem Solving', level: 95 },
+        { name: 'Team Collaboration', level: 90 },
+        { name: 'Communication', level: 85 },
+        { name: 'Project Management', level: 80 },
+        { name: 'Innovation', level: 92 }
+      ]
+    }
+  };
+}};

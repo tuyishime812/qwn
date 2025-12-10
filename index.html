@@ -1,0 +1,1315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tuyishime Martin | Web Developer & AI/ML Engineer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            transition: background-color 0.3s ease;
+        }
+
+        /* Dark mode styles */
+        .dark body {
+            background: linear-gradient(135deg, #0c4a6e 0%, #075985 100%);
+            color: #e0f2fe;
+        }
+
+        .dark .section-bg,
+        .dark .hero-bg {
+            background: radial-gradient(circle at 25% 25%, rgba(103, 232, 249, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 75% 75%, rgba(14, 165, 233, 0.1) 0%, transparent 50%);
+        }
+
+        .dark .nav-link {
+            color: #bae6fd !important;
+        }
+
+        .dark .nav-link:hover {
+            color: #0ea5e9 !important;
+        }
+
+        .dark .bg-white {
+            background-color: #075985;
+        }
+
+        .dark .bg-gray-50 {
+            background-color: #075985;
+        }
+
+        .dark .text-gray-800 {
+            color: #e0f2fe;
+        }
+
+        .dark .text-gray-600 {
+            color: #7dd3fc;
+        }
+
+        .dark .gradient-text {
+            background: linear-gradient(135deg, #0ea5e9, #0284c7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .dark .project-card {
+            background: rgba(7, 89, 133, 0.8) !important;
+            border: 1px solid rgba(56, 189, 248, 0.2) !important;
+            box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.3) !important;
+        }
+
+        .dark .social-icon {
+            background: linear-gradient(135deg, #0ea5e9, #0284c7) !important;
+        }
+
+        .dark .skill-bar {
+            background: #0c4a6e;
+        }
+
+        .dark .bg-white\/80 {
+            background-color: rgba(7, 89, 133, 0.8) !important;
+        }
+
+        .dark .bg-white\/95 {
+            background-color: rgba(7, 89, 133, 0.95) !important;
+        }
+
+        .dark .bg-white\/90 {
+            background-color: rgba(7, 89, 133, 0.9) !important;
+        }
+
+        .dark .bg-gray-50\/50 {
+            background-color: rgba(7, 89, 133, 0.5) !important;
+        }
+
+        .dark .border-gray-200 {
+            border-color: #0369a1;
+        }
+
+        .dark .border-gray-100 {
+            border-color: #0c4a6e;
+        }
+
+        .dark .shadow-sm {
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+        }
+
+        .dark .shadow-lg {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+        }
+
+        .dark .shadow-xl {
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+        }
+
+        .dark .shadow-2xl {
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Enhanced color scheme for light mode */
+        .text-primary {
+            color: #0ea5e9;
+        }
+
+        .bg-primary {
+            background-color: #0ea5e9;
+        }
+
+        .text-secondary {
+            color: #0284c7;
+        }
+
+        .bg-secondary {
+            background-color: #0284c7;
+        }
+
+        .border-primary {
+            border-color: #0ea5e9;
+        }
+
+        .hover\:text-primary:hover {
+            color: #0ea5e9;
+        }
+
+        .hover\:bg-primary:hover {
+            background-color: #0ea5e9;
+        }
+
+        .section {
+            padding: 100px 0;
+        }
+
+        .nav-link.active {
+            position: relative;
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #0ea5e9, #0284c7);
+            border-radius: 2px;
+        }
+
+        .skill-bar {
+            height: 12px;
+            border-radius: 10px;
+            background: #e2e8f0;
+            margin-top: 12px;
+            overflow: hidden;
+            box-shadow: inset 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+        }
+
+        .skill-progress {
+            height: 100%;
+            border-radius: 10px;
+            background: linear-gradient(90deg, #0ea5e9, #0284c7);
+            width: 0%;
+            transition: width 1.5s ease-in-out;
+        }
+
+        .skill-progress.animated {
+            animation: fillBar 1.5s ease-in-out forwards;
+        }
+
+        @keyframes fillBar {
+            from { width: 0%; }
+            to { width: var(--target-width); }
+        }
+
+        /* Animated skill icons */
+        .skill-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            color: white;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+
+        .animated-skill-item {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .animated-skill-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .project-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            opacity: 1;
+            transform: scale(1);
+            transition: opacity 0.3s ease, transform 0.3s ease, all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .project-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        .social-icon {
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            color: white;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 15px -5px rgba(59, 130, 246, 0.4);
+        }
+
+        .social-icon:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px -5px rgba(59, 130, 246, 0.6);
+        }
+
+        .btn {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(135deg, #0ea5e9, #0284c7);
+            transition: all 0.5s ease;
+            z-index: -1;
+        }
+
+        .btn:hover::before {
+            width: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px -5px rgba(14, 165, 233, 0.4);
+        }
+
+        .floating-element {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #0ea5e9, #0284c7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-bg {
+            background: radial-gradient(circle at top right, rgba(14, 165, 233, 0.15) 0%, transparent 40%),
+                        radial-gradient(circle at bottom left, rgba(2, 132, 199, 0.15) 0%, transparent 40%);
+        }
+
+        .section-bg {
+            background: radial-gradient(circle at 25% 25%, rgba(14, 165, 233, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 75% 75%, rgba(2, 132, 199, 0.1) 0%, transparent 50%);
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-white/80 backdrop-blur-md z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <a href="#" class="text-xl font-bold gradient-text">Tuyishime<span class="text-gray-800">.</span></a>
+                </div>
+
+                <div class="hidden md:flex items-center space-x-10">
+                    <a href="#home" class="nav-link text-gray-600 hover:text-blue-600 transition relative">Home</a>
+                    <a href="#about" class="nav-link text-gray-600 hover:text-blue-600 transition relative">About</a>
+                    <a href="#skills" class="nav-link text-gray-600 hover:text-blue-600 transition relative">Skills</a>
+                    <a href="#projects" class="nav-link text-gray-600 hover:text-blue-600 transition relative">Projects</a>
+                    <a href="#contact" class="nav-link text-gray-600 hover:text-blue-600 transition relative">Contact</a>
+                </div>
+
+                <div class="flex items-center space-x-4">
+                    <!-- Theme Toggle -->
+                    <button id="theme-toggle" onclick="toggleTheme()" class="p-2 rounded-full hover:bg-gray-100 transition">
+                        <i class="fas fa-moon text-gray-600"></i>
+                    </button>
+
+                    <div class="md:hidden flex items-center">
+                        <button id="mobile-menu-button" class="outline-none">
+                            <svg class="w-6 h-6" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+                                <path d="M4 6h16M4 12h16M4 18h16"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white/90 backdrop-blur-md">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 flex flex-col">
+                <a href="#home" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Home</a>
+                <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">About</a>
+                <a href="#skills" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Skills</a>
+                <a href="#projects" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Projects</a>
+                <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Contact</a>
+                <div class="flex justify-center pt-2">
+                    <button id="mobile-theme-toggle" onclick="toggleTheme()" class="p-2 rounded-full hover:bg-gray-100 transition">
+                        <i class="fas fa-moon text-gray-600"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="section hero-bg relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-16 md:mb-0">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
+                        Hi, I'm <span class="gradient-text">Tuyishime Martin</span>
+                    </h1>
+                    <h2 class="text-2xl md:text-3xl text-gray-600 mt-4 mb-6 font-medium">
+                        Web Developer & AI/ML Engineer
+                    </h2>
+                    <p class="text-lg text-gray-600 mb-8 max-w-lg">
+                        I architect sophisticated web applications and implement cutting-edge AI/ML solutions that transform business operations and drive innovation.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#projects" class="btn bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-8 py-4 rounded-xl font-medium shadow-lg">View Projects</a>
+                        <a href="#contact" class="btn border-2 border-blue-600 text-blue-600 px-8 py-4 rounded-xl font-medium">Contact Me</a>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center">
+                    <div class="relative">
+                        <div class="w-72 h-72 md:w-80 md:h-80 rounded-full overflow-hidden border-8 border-white shadow-2xl floating-element">
+                            <img src="./IMG_20241213_063301.jpg" alt="Tuyishime Martin" class="w-full h-full object-cover">
+                        </div>
+                        <div class="absolute -bottom-4 -right-4 bg-gradient-to-r from-yellow-400 to-orange-500 text-gray-800 px-6 py-3 rounded-full font-bold shadow-lg">
+                            <i class="fas fa-star mr-2"></i> Open to Work
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section section-bg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800">About Me</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-blue-600 to-indigo-600 mx-auto mt-4 rounded-full"></div>
+            </div>
+            
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-2/5 mb-10 md:mb-0 flex justify-center">
+                    <div class="w-72 h-72 rounded-2xl overflow-hidden shadow-2xl border-4 border-white">
+                        <img src="./IMG_20241213_063301.jpg" alt="About Me" class="w-full h-full object-cover">
+                    </div>
+                </div>
+                
+                <div class="md:w-3/5 md:pl-16">
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-6">Web Developer & AI/ML Engineer</h3>
+                    <p class="text-gray-600 mb-6 text-lg leading-relaxed">
+                        I'm a passionate developer with expertise in building modern web applications and implementing cutting-edge AI/ML solutions. With a strong foundation in computer science and years of experience, I bring ideas to life with elegant, efficient code.
+                    </p>
+                    <p class="text-gray-600 mb-8 text-lg leading-relaxed">
+                        My approach combines technical excellence with creative problem-solving. I specialize in developing scalable web solutions and leveraging artificial intelligence to solve complex real-world challenges.
+                    </p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-white/60 p-4 rounded-xl shadow-sm">
+                            <h4 class="font-semibold text-gray-800 flex items-center">
+                                <i class="fas fa-user mr-3 text-blue-600"></i> Name:
+                            </h4>
+                            <p class="text-gray-600">Tuyishime Martin</p>
+                        </div>
+                        <div class="bg-white/60 p-4 rounded-xl shadow-sm">
+                            <h4 class="font-semibold text-gray-800 flex items-center">
+                                <i class="fas fa-envelope mr-3 text-blue-600"></i> Email:
+                            </h4>
+                            <p class="text-gray-600">tuyishimemartin007@gmail.com</p>
+                        </div>
+                        <div class="bg-white/60 p-4 rounded-xl shadow-sm">
+                            <h4 class="font-semibold text-gray-800 flex items-center">
+                                <i class="fas fa-map-marker-alt mr-3 text-blue-600"></i> From:
+                            </h4>
+                            <p class="text-gray-600">Dowa, Malawi</p>
+                        </div>
+                        <div class="bg-white/60 p-4 rounded-xl shadow-sm">
+                            <h4 class="font-semibold text-gray-800 flex items-center">
+                                <i class="fas fa-briefcase mr-3 text-blue-600"></i> Availability:
+                            </h4>
+                            <p class="text-gray-600">Freelance & Full-time</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section section-bg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white">My Skills</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-blue-600 to-indigo-600 mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                <!-- Technical Skills -->
+                <div>
+                    <h3 class="text-2xl font-semibold text-gray-800 dark:text-white mb-8 text-center">Technical Skills</h3>
+
+                    <div class="space-y-8">
+                        <div class="animated-skill-item">
+                            <div class="flex justify-between mb-3">
+                                <div class="flex items-center">
+                                    <div class="skill-icon">
+                                        <i class="fas fa-code"></i>
+                                    </div>
+                                    <span class="font-medium text-gray-700 dark:text-gray-300">Web Development</span>
+                                </div>
+                                <span class="text-gray-600 dark:text-gray-400 font-medium">56%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="--target-width: 56%"></div>
+                            </div>
+                        </div>
+
+                        <div class="animated-skill-item">
+                            <div class="flex justify-between mb-3">
+                                <div class="flex items-center">
+                                    <div class="skill-icon">
+                                        <i class="fab fa-js"></i>
+                                    </div>
+                                    <span class="font-medium text-gray-700 dark:text-gray-300">JavaScript/React</span>
+                                </div>
+                                <span class="text-gray-600 dark:text-gray-400 font-medium">60%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="--target-width: 60%"></div>
+                            </div>
+                        </div>
+
+                        <div class="animated-skill-item">
+                            <div class="flex justify-between mb-3">
+                                <div class="flex items-center">
+                                    <div class="skill-icon">
+                                        <i class="fab fa-python"></i>
+                                    </div>
+                                    <span class="font-medium text-gray-700 dark:text-gray-300">Python/AI/ML</span>
+                                </div>
+                                <span class="text-gray-600 dark:text-gray-400 font-medium">42%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="--target-width: 42%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Professional Skills -->
+                <div>
+                    <h3 class="text-2xl font-semibold text-gray-800 dark:text-white mb-8 text-center">Professional Skills</h3>
+
+                    <div class="space-y-8">
+                        <div class="animated-skill-item">
+                            <div class="flex justify-between mb-3">
+                                <div class="flex items-center">
+                                    <div class="skill-icon">
+                                        <i class="fas fa-lightbulb"></i>
+                                    </div>
+                                    <span class="font-medium text-gray-700 dark:text-gray-300">Problem Solving</span>
+                                </div>
+                                <span class="text-gray-600 dark:text-gray-400 font-medium">70%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="--target-width: 70%"></div>
+                            </div>
+                        </div>
+
+                        <div class="animated-skill-item">
+                            <div class="flex justify-between mb-3">
+                                <div class="flex items-center">
+                                    <div class="skill-icon">
+                                        <i class="fas fa-comments"></i>
+                                    </div>
+                                    <span class="font-medium text-gray-700 dark:text-gray-300">Communication</span>
+                                </div>
+                                <span class="text-gray-600 dark:text-gray-400 font-medium">85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="--target-width: 85%"></div>
+                            </div>
+                        </div>
+
+                        <div class="animated-skill-item">
+                            <div class="flex justify-between mb-3">
+                                <div class="flex items-center">
+                                    <div class="skill-icon">
+                                        <i class="fas fa-bolt"></i>
+                                    </div>
+                                    <span class="font-medium text-gray-700 dark:text-gray-300">Innovation</span>
+                                </div>
+                                <span class="text-gray-600 dark:text-gray-400 font-medium">92%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="--target-width: 92%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white">My Projects</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-blue-600 to-indigo-600 mx-auto mt-4 rounded-full"></div>
+                <p class="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mt-4 text-lg">
+                    Here are some of my notable projects showcasing my expertise in web development and AI/ML
+                </p>
+            </div>
+
+            <!-- Search and Filter Controls -->
+            <div class="mb-12">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                    <div class="w-full md:w-1/3">
+                        <div class="relative">
+                            <input
+                                type="text"
+                                id="project-search"
+                                placeholder="Search projects..."
+                                class="w-full px-6 py-3 pl-12 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition shadow-sm dark:bg-gray-800 dark:text-white"
+                            >
+                            <i class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap gap-3 w-full md:w-auto" id="filter-buttons">
+                        <button class="filter-btn bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-4 py-2 rounded-full font-medium active" data-filter="all">
+                            All
+                        </button>
+                        <button class="filter-btn bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 px-4 py-2 rounded-full font-medium" data-filter="web">
+                            Web Dev
+                        </button>
+                        <button class="filter-btn bg-indigo-100 dark:bg-indigo-900 text-indigo-800 dark:text-indigo-200 px-4 py-2 rounded-full font-medium" data-filter="ai">
+                            AI/ML
+                        </button>
+                        <button class="filter-btn bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-4 py-2 rounded-full font-medium" data-filter="data">
+                            Data Science
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10" id="projects-container">
+                <!-- Project 1 -->
+                <div class="project-card bg-white/80 dark:bg-gray-800/80 rounded-2xl overflow-hidden shadow-lg border border-gray-100 dark:border-gray-700" data-category="ai" data-tags="python tensorflow pytorch typescript tailwind">
+                    <div class="h-56 overflow-hidden">
+                        <img src="./mlimi-smart.png" alt="Mlimi Smart" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-4">Mlimi Smart</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-6">
+                            An intelligent digital agriculture platform that empowers smallholder farmers with real-time information, advisory services, and market opportunities using AI-driven tools.
+                        </p>
+                        <div class="flex flex-wrap gap-3 mb-6">
+                            <span class="bg-gradient-to-r from-green-100 to-teal-100 dark:from-green-900 dark:to-teal-900 text-green-800 dark:text-green-200 text-sm px-4 py-2 rounded-full">Python</span>
+                            <span class="bg-gradient-to-r from-green-100 to-teal-100 dark:from-green-900 dark:to-teal-900 text-green-800 dark:text-green-200 text-sm px-4 py-2 rounded-full">TensorFlow</span>
+                            <span class="bg-gradient-to-r from-green-100 to-teal-100 dark:from-green-900 dark:to-teal-900 text-green-800 dark:text-green-200 text-sm px-4 py-2 rounded-full">PyTorch</span>
+                        </div>
+                        <div class="flex flex-wrap gap-3 mb-6">
+                            <span class="bg-gradient-to-r from-green-100 to-teal-100 dark:from-green-900 dark:to-teal-900 text-green-800 dark:text-green-200 text-sm px-4 py-2 rounded-full">TypeScript</span>
+                            <span class="bg-gradient-to-r from-green-100 to-teal-100 dark:from-green-900 dark:to-teal-900 text-green-800 dark:text-green-200 text-sm px-4 py-2 rounded-full">TailwindCSS</span>
+                        </div>
+                        <a href="https://mlimi-smart1.vercel.app/" target="_blank" class="text-green-600 dark:text-green-400 font-medium flex items-center group">
+                            View Live Project
+                            <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card bg-white/80 dark:bg-gray-800/80 rounded-2xl overflow-hidden shadow-lg border border-gray-100 dark:border-gray-700" data-category="web" data-tags="javascript nodejs mongodb full-stack">
+                    <div class="h-56 overflow-hidden">
+                        <img src="https://placehold.co/600x400/8b5cf6/white?text=Web+App" alt="E-Commerce Platform" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-4">E-Commerce Platform</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-6">
+                            A full-stack e-commerce solution with payment processing and inventory management.
+                        </p>
+                        <div class="flex flex-wrap gap-3 mb-6">
+                            <span class="bg-gradient-to-r from-purple-100 to-indigo-100 dark:from-purple-900 dark:to-indigo-900 text-purple-800 dark:text-purple-200 text-sm px-4 py-2 rounded-full">JavaScript</span>
+                            <span class="bg-gradient-to-r from-purple-100 to-indigo-100 dark:from-purple-900 dark:to-indigo-900 text-purple-800 dark:text-purple-200 text-sm px-4 py-2 rounded-full">Node.js</span>
+                            <span class="bg-gradient-to-r from-purple-100 to-indigo-100 dark:from-purple-900 dark:to-indigo-900 text-purple-800 dark:text-purple-200 text-sm px-4 py-2 rounded-full">MongoDB</span>
+                        </div>
+                        <a href="#" class="text-purple-600 dark:text-purple-400 font-medium flex items-center group">
+                            View Details
+                            <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-card bg-white/80 dark:bg-gray-800/80 rounded-2xl overflow-hidden shadow-lg border border-gray-100 dark:border-gray-700" data-category="ai" data-tags="python javascript multilingual">
+                    <div class="h-56 overflow-hidden">
+                        <img src="./Virtula_story.png" alt="Virtual Story Generator" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-4">Virtual Story Generator</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-6">
+                            An AI-powered platform that creates personalized stories supporting multiple languages including Swahili, Chichewa, Kinyarwanda, Yao, and English.
+                        </p>
+                        <div class="flex flex-wrap gap-3 mb-6">
+                            <span class="bg-gradient-to-r from-amber-100 to-orange-100 dark:from-amber-900 dark:to-orange-900 text-amber-800 dark:text-amber-200 text-sm px-4 py-2 rounded-full">Python</span>
+                            <span class="bg-gradient-to-r from-amber-100 to-orange-100 dark:from-amber-900 dark:to-orange-900 text-amber-800 dark:text-amber-200 text-sm px-4 py-2 rounded-full">JavaScript</span>
+                            <span class="bg-gradient-to-r from-amber-100 to-orange-100 dark:from-amber-900 dark:to-orange-900 text-amber-800 dark:text-amber-200 text-sm px-4 py-2 rounded-full">AI/ML</span>
+                        </div>
+                        <a href="https://virtual-story-generator.vercel.app/" target="_blank" class="text-amber-600 dark:text-amber-400 font-medium flex items-center group">
+                            View Live Project
+                            <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section section-bg">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Get In Touch</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-blue-600 to-indigo-600 mx-auto mt-4 rounded-full"></div>
+                <p class="text-gray-600 max-w-2xl mx-auto mt-4 text-lg">
+                    Have a project in mind or want to discuss potential opportunities? Feel free to reach out!
+                </p>
+            </div>
+            
+            <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl p-10 border border-gray-100">
+                <form id="contactForm">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                        <div>
+                            <label for="name" class="block text-gray-700 font-medium mb-3">Name</label>
+                            <input type="text" id="name" name="name" class="w-full px-6 py-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition shadow-sm" required>
+                        </div>
+                        <div>
+                            <label for="email" class="block text-gray-700 font-medium mb-3">Email</label>
+                            <input type="email" id="email" name="email" class="w-full px-6 py-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition shadow-sm" required>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-8">
+                        <label for="subject" class="block text-gray-700 font-medium mb-3">Subject</label>
+                        <input type="text" id="subject" name="subject" class="w-full px-6 py-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition shadow-sm" required>
+                    </div>
+                    
+                    <div class="mb-8">
+                        <label for="message" class="block text-gray-700 font-medium mb-3">Message</label>
+                        <textarea id="message" name="message" rows="6" class="w-full px-6 py-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition shadow-sm" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="w-full btn bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-4 px-8 rounded-xl font-semibold shadow-lg">
+                        Send Message
+                    </button>
+                    <div id="formMessage" class="mt-4 text-center hidden"></div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Social Media Section -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div class="text-center">
+            <h3 class="text-2xl font-semibold text-gray-800 dark:text-white mb-10">Connect With Me</h3>
+            <div class="flex justify-center space-x-8">
+                <a href="https://www.linkedin.com/in/tuyishime-martin-04532932a" target="_blank" class="social-icon">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="https://github.com/tuyishime812" target="_blank" class="social-icon">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://x.com/Tuyishimecrypto" target="_blank" class="social-icon">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" class="social-icon">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.facebook.com/profile.php?id=100086219627900" target="_blank" class="social-icon">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Footer -->
+    <footer class="bg-gradient-to-r from-gray-900 to-gray-800 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <p class="text-lg">&copy; 2025 Tuyishime Martin. All rights reserved.</p>
+                </div>
+                <div class="flex space-x-8">
+                    <a href="#home" class="hover:text-blue-400 transition">Home</a>
+                    <a href="#about" class="hover:text-blue-400 transition">About</a>
+                    <a href="#skills" class="hover:text-blue-400 transition">Skills</a>
+                    <a href="#projects" class="hover:text-blue-400 transition">Projects</a>
+                    <a href="#contact" class="hover:text-blue-400 transition">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Notification Popup -->
+    <div id="notification" class="fixed top-6 right-6 z-50 bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl border border-gray-200 p-5 max-w-sm transform transition-all duration-300 opacity-0 scale-95 pointer-events-none">
+        <div class="flex items-start">
+            <div class="flex-shrink-0">
+                <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full flex items-center justify-center">
+                    <i class="fas fa-robot text-white text-xl"></i>
+                </div>
+            </div>
+            <div class="ml-4 flex-1">
+                <h4 class="font-semibold text-gray-800">Martin's Assistant</h4>
+                <p class="text-gray-600 text-sm mt-1">Hello! I'm Tuyishime Martin's virtual assistant. Need help with anything?</p>
+                <div class="mt-3 flex space-x-2">
+                    <button id="notification-close" class="text-blue-600 font-medium text-sm hover:text-blue-800">Dismiss</button>
+                    <button id="notification-open-chat" class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-3 py-1 rounded-lg text-sm hover:shadow-md transition">Chat Now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot" class="fixed bottom-8 right-8 z-50">
+        <!-- Chatbot Toggle Button -->
+        <button id="chatbot-toggle" class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-5 rounded-full shadow-xl hover:shadow-2xl transition-all transform hover:scale-110">
+            <i class="fas fa-robot text-xl"></i>
+            <span id="unread-count" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-6 h-6 flex items-center justify-center hidden">0</span>
+        </button>
+
+        <!-- Chatbot Window -->
+        <div id="chatbot-window" class="hidden absolute bottom-24 right-0 w-96 h-[500px] bg-white/95 backdrop-blur-lg rounded-2xl shadow-2xl border border-gray-200 flex flex-col overflow-hidden">
+            <div class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-5 rounded-t-2xl flex justify-between items-center">
+                <div class="font-semibold flex items-center">
+                    <i class="fas fa-robot mr-3"></i> Martin's Assistant
+                </div>
+                <div class="flex space-x-3">
+                    <button id="chatbot-clear" class="text-white hover:text-gray-200">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                    <button id="chatbot-close" class="text-white hover:text-gray-200">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            <div id="chatbot-messages" class="flex-1 overflow-y-auto p-5 space-y-4 bg-gray-50/50">
+                <div class="mb-4">
+                    <div class="bg-gradient-to-r from-blue-100 to-indigo-100 text-gray-800 p-4 rounded-2xl inline-block max-w-[85%] shadow-sm">
+                        Hello! I'm Tuyishime Martin's virtual assistant. How can I help you today?
+                        You can ask me about Tuyishime Martin's work, skills, or projects.
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-200 p-4 bg-white">
+                <div class="flex">
+                    <input
+                        type="text"
+                        id="chatbot-input"
+                        placeholder="Type your message..."
+                        class="flex-1 border border-gray-300 rounded-l-2xl px-5 py-3 focus:outline-none focus:ring-2 focus:ring-blue-600 shadow-sm"
+                    >
+                    <button id="chatbot-send" class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-5 py-3 rounded-r-2xl hover:shadow-md transition">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Theme management
+        function initializeTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.classList.toggle('dark', savedTheme === 'dark');
+            updateThemeIcon(savedTheme);
+        }
+
+        function toggleTheme() {
+            const isDark = document.documentElement.classList.contains('dark');
+            const newTheme = isDark ? 'light' : 'dark';
+
+            document.documentElement.classList.toggle('dark');
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        }
+
+        function updateThemeIcon(theme) {
+            const themeButton = document.getElementById('theme-toggle');
+            if (themeButton) {
+                themeButton.innerHTML = theme === 'dark'
+                    ? '<i class="fas fa-sun text-yellow-400"></i>'
+                    : '<i class="fas fa-moon text-gray-600"></i>';
+            }
+        }
+
+        // Initialize theme when page loads
+        document.addEventListener('DOMContentLoaded', initializeTheme);
+
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking on a link
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Change active nav link on scroll
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('.section');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            let current = '';
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+
+                if(pageYOffset >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if(link.getAttribute('href').substring(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Handle contact form submission
+        const contactForm = document.getElementById('contactForm');
+        const formMessage = document.getElementById('formMessage');
+
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // Get form values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+
+            // Show loading state
+            const submitButton = contactForm.querySelector('button[type="submit"]');
+            const originalText = submitButton.textContent;
+            submitButton.disabled = true;
+            submitButton.textContent = 'Sending...';
+
+            try {
+                const response = await fetch('/api/contact', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ name, email, subject, message })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    formMessage.className = 'mt-4 text-center text-green-600';
+                    formMessage.textContent = data.message;
+                    contactForm.reset();
+                } else {
+                    formMessage.className = 'mt-4 text-center text-red-600';
+                    formMessage.textContent = data.error || 'Failed to send message. Please try again.';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                formMessage.className = 'mt-4 text-center text-red-600';
+                formMessage.textContent = 'An error occurred. Please try again.';
+            } finally {
+                // Reset button state
+                submitButton.disabled = false;
+                submitButton.textContent = originalText;
+
+                // Hide message after 5 seconds
+                setTimeout(() => {
+                    formMessage.classList.add('hidden');
+                }, 5000);
+            }
+        });
+
+        // Enhanced Chatbot functionality with notifications
+        const chatbotToggle = document.getElementById('chatbot-toggle');
+        const chatbotWindow = document.getElementById('chatbot-window');
+        const chatbotClose = document.getElementById('chatbot-close');
+        const chatbotInput = document.getElementById('chatbot-input');
+        const chatbotSend = document.getElementById('chatbot-send');
+        const chatbotMessages = document.getElementById('chatbot-messages');
+        const chatbotClear = document.getElementById('chatbot-clear');
+        const notification = document.getElementById('notification');
+        const notificationClose = document.getElementById('notification-close');
+        const notificationOpenChat = document.getElementById('notification-open-chat');
+        const unreadCount = document.getElementById('unread-count');
+
+        // Session tracking variables
+        let isNewUser = false;
+        let chatMessages = [];
+
+        // Initialize notification on page load
+        window.addEventListener('load', () => {
+            // Check if user has visited before (using localStorage as a simple session)
+            const hasVisited = localStorage.getItem('hasVisited');
+            if (!hasVisited) {
+                isNewUser = true;
+                localStorage.setItem('hasVisited', 'true');
+
+                // Show notification after 3 seconds
+                setTimeout(showNotification, 3000);
+            }
+        });
+
+        function showNotification() {
+            notification.classList.remove('opacity-0', 'scale-95', 'pointer-events-none');
+            notification.classList.add('opacity-100', 'scale-100');
+        }
+
+        function hideNotification() {
+            notification.classList.remove('opacity-100', 'scale-100');
+            notification.classList.add('opacity-0', 'scale-95', 'pointer-events-none');
+        }
+
+        // Notification event listeners
+        notificationClose.addEventListener('click', hideNotification);
+        notificationOpenChat.addEventListener('click', () => {
+            hideNotification();
+            chatbotWindow.classList.remove('hidden');
+            // Scroll to bottom
+            chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+        });
+
+        // Toggle chatbot window
+        chatbotToggle.addEventListener('click', () => {
+            chatbotWindow.classList.toggle('hidden');
+            // Scroll to bottom when opening
+            if (!chatbotWindow.classList.contains('hidden')) {
+                chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+            }
+        });
+
+        // Close chatbot window
+        chatbotClose.addEventListener('click', () => {
+            chatbotWindow.classList.add('hidden');
+        });
+
+        // Clear chat messages
+        chatbotClear.addEventListener('click', clearChat);
+
+        function clearChat() {
+            chatbotMessages.innerHTML = '';
+            addMessage("Hello! I'm Tuyishime Martin's virtual assistant. How can I help you today? You can ask me about Tuyishime Martin's work, skills, or projects.", 'bot');
+            chatMessages = [];
+        }
+
+        // Send message when clicking send button
+        chatbotSend.addEventListener('click', sendMessage);
+
+        // Send message when pressing Enter
+        chatbotInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        // Enhanced predefined responses with more professional and comprehensive answers
+        const responses = {
+            greeting: [
+                "Hello! I'm Tuyishime Martin's virtual assistant. How can I help you today? You can ask me about Tuyishime Martin's work, skills, or projects.",
+                "Hi there! I'm here to answer questions about Tuyishime Martin's work and projects. What would you like to know?",
+                "Greetings! I'm Tuyishime Martin's AI assistant. Ask me anything about Tuyishime Martin's professional experience!"
+            ],
+            name: [
+                "Tuyishime Martin's full name is Tuyishime Martin. He's a skilled Web Developer and AI/ML Engineer with a passion for creating innovative solutions.",
+                "Tuyishime Martin is a professional Web Developer and AI/ML Engineer specializing in modern web applications and machine learning solutions.",
+                "Tuyishime Martin is a talented developer who combines expertise in web development with advanced knowledge in artificial intelligence and machine learning."
+            ],
+            skills: [
+                "Tuyishime Martin specializes in Web Development (56%), JavaScript/React (60%), and Python/AI/ML (42%). He also excels in problem-solving and communication.",
+                "Tuyishime Martin is an expert in both technical and professional skills. His technical expertise includes web development, AI/ML, cloud services, and UI/UX design. His professional skills include problem-solving, communication, and innovation.",
+                "Tuyishime Martin's core competencies encompass web development, JavaScript/React, Python/AI/ML, cloud services, and UI/UX design with a focus on user experience."
+            ],
+            projects: [
+                "Tuyishime Martin has developed an AI-Powered Analytics Platform using Python, TensorFlow, and React; an E-Commerce Platform with JavaScript, Node.js, and MongoDB; and a Virtual Story Generator using Python and JavaScript.",
+                "Tuyishime Martin's project portfolio includes innovative solutions in AI analytics, e-commerce systems, and multilingual applications that solve real-world problems.",
+                "Some of Tuyishime Martin's notable projects demonstrate his expertise in creating scalable applications that combine cutting-edge technology with practical business value."
+            ],
+            contact: [
+                "You can contact Tuyishime Martin at tuyishimemartin007@gmail.com or connect with him professionally on LinkedIn, GitHub, and X (Twitter). For immediate assistance, feel free to use the contact form on this page.",
+                "To get in touch with Tuyishime Martin professionally, use the contact form on this page. You can also connect with him on his social media profiles for updates and networking.",
+                "Tuyishime Martin is open to new opportunities. Contact him at tuyishimemartin007@gmail.com or through his social media profiles linked on this page."
+            ],
+            availability: [
+                "Tuyishime Martin is currently available for freelance and full-time positions. He's open to exciting opportunities that align with his expertise in web development and AI/ML.",
+                "Yes, Tuyishime Martin is actively seeking new opportunities. He's available for both freelance projects and full-time positions in his areas of expertise.",
+                "Tuyishime Martin is open to collaboration on innovative projects. Whether you need a web solution or an AI/ML implementation, he's ready to contribute his skills."
+            ],
+            location: [
+                "Tuyishime Martin is based in Dowa, Malawi. He's available for remote opportunities and also open to relocation for the right position.",
+                "Tuyishime Martin works remotely from Dowa, Malawi. He's experienced in remote collaboration and has worked with international teams.",
+                "Tuyishime Martin's location is Dowa, Malawi, but he's ready to work with clients and companies worldwide through remote collaboration."
+            ],
+            experience: [
+                "Tuyishime Martin has extensive experience as a Senior Web Developer, AI/ML Engineer, and Full Stack Developer. His career spans innovative projects in web development and artificial intelligence.",
+                "Tuyishime Martin's professional journey includes roles at Tech Solutions Inc., Data Insights Co., and StartUp Ventures, showcasing his diverse expertise across industries.",
+                "With experience as both a developer and engineer, Tuyishime Martin brings practical knowledge and technical depth to every project he tackles."
+            ],
+            education: [
+                "Tuyishime Martin holds an MSc in Computer Science from University of Technology and a BSc in Software Engineering from State University, providing a strong academic foundation for his work.",
+                "Tuyishime Martin's educational background includes advanced studies in Computer Science and Software Engineering, supporting his expertise in technology and innovation.",
+                "With formal education in computer science and continuous learning in emerging technologies, Tuyishime Martin stays at the forefront of industry trends."
+            ],
+            services: [
+                "Tuyishime Martin offers services in Web Development, AI/ML Solutions, Data Analytics, Technical Consulting, UI/UX Design, and Technical Writing. He provides comprehensive solutions for complex projects.",
+                "Tuyishime Martin's service portfolio includes full-stack development, machine learning implementations, data analysis, and technology consulting to help businesses solve complex challenges.",
+                "Whether you need a custom web application, an AI solution, or technical guidance, Tuyishime Martin provides end-to-end services to bring your ideas to life."
+            ],
+            default: [
+                "I understand you're interested in learning more about Tuyishime Martin. You can ask me about his skills, projects, experience, contact information, or availability for new opportunities.",
+                "I'm here to help you learn more about Tuyishime Martin's professional background. Feel free to ask about his technical skills, past projects, or how to get in touch with him.",
+                "Tuyishime Martin's expertise spans web development and AI/ML. You can ask me about specific aspects of his work, his approach to projects, or how he can help with your technical needs."
+            ]
+        };
+
+        function sendMessage() {
+            const message = chatbotInput.value.trim();
+            if (!message) return;
+
+            // Add user message to chat
+            addMessage(message, 'user');
+            chatMessages.push({ sender: 'user', text: message });
+            chatbotInput.value = '';
+
+            // Show typing indicator
+            const typingIndicator = document.createElement('div');
+            typingIndicator.id = 'typing-indicator';
+            typingIndicator.className = 'mb-4 text-right';
+            typingIndicator.innerHTML = '<div class="bg-gray-300 text-gray-800 p-3 rounded-2xl inline-block max-w-[85%] shadow-sm">Thinking...</div>';
+            chatbotMessages.appendChild(typingIndicator);
+            chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+
+            // Process message and generate response after a short delay
+            setTimeout(() => {
+                const response = generateEnhancedResponse(message);
+                typingIndicator.remove();
+                addMessage(response, 'bot');
+                chatMessages.push({ sender: 'bot', text: response });
+
+                // Update unread count if chat window is hidden
+                if (chatbotWindow.classList.contains('hidden')) {
+                    const currentCount = parseInt(unreadCount.textContent) || 0;
+                    unreadCount.textContent = currentCount + 1;
+                    unreadCount.classList.remove('hidden');
+                }
+            }, 1000);
+        }
+
+        function addMessage(text, sender) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `mb-4 ${sender === 'user' ? 'text-right' : ''}`;
+
+            const messageContent = document.createElement('div');
+            messageContent.className = sender === 'user'
+                ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-4 rounded-2xl rounded-tr-none inline-block max-w-[85%] shadow-sm'
+                : 'bg-gradient-to-r from-blue-100 to-indigo-100 text-gray-800 p-4 rounded-2xl rounded-tl-none inline-block max-w-[85%] shadow-sm';
+
+            messageContent.textContent = text;
+            messageDiv.appendChild(messageContent);
+            chatbotMessages.appendChild(messageDiv);
+
+            // Scroll to bottom
+            chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+        }
+
+        function generateEnhancedResponse(message) {
+            const lowerMsg = message.toLowerCase();
+
+            // Check for specific keywords and patterns in the message
+            if (lowerMsg.includes('hello') || lowerMsg.includes('hi') || lowerMsg.includes('hey')) {
+                return getRandomResponse('greeting');
+            } else if (lowerMsg.includes('name') || lowerMsg.includes('who are you') || lowerMsg.includes('tell me about')) {
+                return getRandomResponse('name');
+            } else if (lowerMsg.includes('skill') || lowerMsg.includes('technology') || lowerMsg.includes('expertise') || lowerMsg.includes('ability')) {
+                return getRandomResponse('skills');
+            } else if (lowerMsg.includes('project') || lowerMsg.includes('work') || lowerMsg.includes('portfolio')) {
+                return getRandomResponse('projects');
+            } else if (lowerMsg.includes('contact') || lowerMsg.includes('email') || lowerMsg.includes('reach') || lowerMsg.includes('get in touch')) {
+                return getRandomResponse('contact');
+            } else if (lowerMsg.includes('available') || lowerMsg.includes('hiring') || lowerMsg.includes('job') || lowerMsg.includes('work') || lowerMsg.includes('open to')) {
+                return getRandomResponse('availability');
+            } else if (lowerMsg.includes('location') || lowerMsg.includes('where') || lowerMsg.includes('city') || lowerMsg.includes('country')) {
+                return getRandomResponse('location');
+            } else if (lowerMsg.includes('experience') || lowerMsg.includes('work history') || lowerMsg.includes('career')) {
+                return getRandomResponse('experience');
+            } else if (lowerMsg.includes('education') || lowerMsg.includes('degree') || lowerMsg.includes('school') || lowerMsg.includes('study')) {
+                return getRandomResponse('education');
+            } else if (lowerMsg.includes('service') || lowerMsg.includes('what do you offer') || lowerMsg.includes('help with')) {
+                return getRandomResponse('services');
+            } else {
+                return getRandomResponse('default');
+            }
+        }
+
+        function getRandomResponse(key) {
+            const responsesList = responses[key];
+            return responsesList[Math.floor(Math.random() * responsesList.length)];
+        }
+
+        // Project filtering and search functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const projectCards = document.querySelectorAll('.project-card');
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const projectSearch = document.getElementById('project-search');
+            const projectsContainer = document.getElementById('projects-container');
+
+            // Initialize filter buttons
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    // Add active class to clicked button
+                    this.classList.add('active');
+
+                    const filter = this.getAttribute('data-filter');
+                    filterProjects(filter);
+                });
+            });
+
+            // Project search functionality
+            if (projectSearch) {
+                projectSearch.addEventListener('input', function() {
+                    const searchTerm = this.value.toLowerCase();
+                    const activeFilter = document.querySelector('.filter-btn.active').getAttribute('data-filter');
+
+                    // First apply the active filter, then search within results
+                    filterProjects(activeFilter, searchTerm);
+                });
+            }
+
+            function filterProjects(category = 'all', searchTerm = '') {
+                projectCards.forEach(card => {
+                    const cardCategory = card.getAttribute('data-category');
+                    const cardTags = card.getAttribute('data-tags').toLowerCase();
+                    const cardTitle = card.querySelector('h3').textContent.toLowerCase();
+                    const cardDescription = card.querySelector('p').textContent.toLowerCase();
+
+                    const matchesCategory = category === 'all' || cardCategory === category;
+                    const matchesSearch = !searchTerm ||
+                                        cardTags.includes(searchTerm) ||
+                                        cardTitle.includes(searchTerm) ||
+                                        cardDescription.includes(searchTerm);
+
+                    if (matchesCategory && matchesSearch) {
+                        card.style.display = 'block';
+                        // Add animation class for smooth appearance
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'scale(1)';
+                        }, 10);
+                    } else {
+                        card.style.opacity = '0';
+                        card.style.transform = 'scale(0.8)';
+                        setTimeout(() => {
+                            card.style.display = 'none';
+                        }, 300); // Match the transition time
+                    }
+                });
+            }
+
+            // Initialize with all projects visible
+            filterProjects('all');
+        });
+
+        // Skill animation when section comes into view
+        document.addEventListener('DOMContentLoaded', function() {
+            const skillsSection = document.getElementById('skills');
+            const skillItems = document.querySelectorAll('.animated-skill-item');
+            const skillBars = document.querySelectorAll('.skill-progress');
+
+            // Function to animate skills
+            function animateSkills() {
+                skillItems.forEach((item, index) => {
+                    setTimeout(() => {
+                        item.classList.add('visible');
+                    }, index * 100); // Stagger the animations
+                });
+
+                // Animate the skill bars
+                setTimeout(() => {
+                    skillBars.forEach(bar => {
+                        bar.classList.add('animated');
+                    });
+                }, 300);
+            }
+
+            // Intersection Observer to trigger animations when skills section is in view
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateSkills();
+                        observer.unobserve(entry.target); // Stop observing after animation
+                    }
+                });
+            }, {
+                threshold: 0.5 // Trigger when 50% of the section is visible
+            });
+
+            if (skillsSection) {
+                observer.observe(skillsSection);
+            }
+        });
+
+        // CV Download functionality
+        document.getElementById('download-cv').addEventListener('click', function() {
+            // Show a message to indicate that normally a CV would be downloaded
+            alert('This would normally download your CV. In a real implementation, this would trigger the download of your resume file.');
+
+            // In a real implementation, you would do something like:
+            // window.open('/path-to-your-cv.pdf', '_blank');
+            // or
+            // const link = document.createElement('a');
+            // link.href = '/path-to-your-cv.pdf';
+            // link.download = 'Tuyishime_Martin_CV.pdf';
+            // link.click();
+        });
+    </script>
+</body>
+</html>
