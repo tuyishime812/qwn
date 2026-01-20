@@ -5,9 +5,16 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Serve static files
+// Serve static files with proper caching
 app.use(express.json());
-app.use(express.static(path.join(__dirname)));
+app.use(express.static(path.join(__dirname), {
+  dotfiles: 'allow',
+  setHeaders: (res, filePath) => {
+    if (filePath.endsWith('.png') || filePath.endsWith('.jpg') || filePath.endsWith('.jpeg') || filePath.endsWith('.gif') || filePath.endsWith('.svg')) {
+      res.setHeader('Cache-Control', 'public, max-age=31536000'); // Cache images for 1 year
+    }
+  }
+}));
 
 // Main route
 app.get('/', (req, res) => {
