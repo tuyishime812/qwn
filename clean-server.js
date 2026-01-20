@@ -154,40 +154,40 @@ app.post('/api/contact', async (req, res) => {
 
   // Validate required fields
   if (!name || !email || !subject || !message) {
-    return res.status(400).json({
-      error: 'All fields are required'
+    return res.status(400).json({ 
+      error: 'All fields are required' 
     });
   }
 
   // Basic email validation regex
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(email)) {
-    return res.status(400).json({
-      error: 'Please provide a valid email address'
+    return res.status(400).json({ 
+      error: 'Please provide a valid email address' 
     });
   }
 
   // Validate message length
   if (message.length < 10) {
-    return res.status(400).json({
-      error: 'Message should be at least 10 characters long'
+    return res.status(400).json({ 
+      error: 'Message should be at least 10 characters long' 
     });
   }
 
   try {
     // Log the message details (in a real implementation, you would send an email)
     console.log('Contact form submission received:', { name, email, subject, message });
-
+    
     // In Vercel environment, email sending might require additional setup
     // For now, we'll return a success message
-    res.status(200).json({
-      message: 'Message received! We will get back to you soon.'
+    res.status(200).json({ 
+      message: 'Message received! We will get back to you soon.' 
     });
   } catch (error) {
     console.error('Error processing contact form:', error);
 
-    res.status(500).json({
-      error: 'Failed to process your message. Please try again later.'
+    res.status(500).json({ 
+      error: 'Failed to process your message. Please try again later.' 
     });
   }
 });
@@ -220,7 +220,7 @@ app.get('/api/cv', (req, res) => {
 
 // 404 handler
 app.use('*', (req, res) => {
-  res.status(404).json({
+  res.status(404).json({ 
     error: 'Route not found',
     message: 'The requested resource does not exist.'
   });
@@ -229,7 +229,7 @@ app.use('*', (req, res) => {
 // Error handling middleware
 app.use((err, req, res, next) => {
   console.error('Error:', err);
-  res.status(500).json({
+  res.status(500).json({ 
     error: 'Something went wrong!',
     message: process.env.NODE_ENV === 'development' ? err.message : 'Internal server error'
   });
@@ -357,5 +357,5 @@ module.exports = { app, server, getPortfolioData: () => {
       'UI/UX Design',
       'Technical Writing'
     ]
-  }
-};
+  };
+}};

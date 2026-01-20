@@ -35,7 +35,7 @@ app.get('/api/portfolio', (req, res) => {
         name: 'Mlimi Smart',
         description: 'An intelligent digital agriculture platform that empowers smallholder farmers with real-time information, advisory services, and market opportunities using AI-driven tools.',
         technologies: ['Python', 'TensorFlow', 'PyTorch', 'TypeScript', 'TailwindCSS'],
-        image: './mlimi-smart.png',
+        image: '/mlimi-smart.png',
         category: 'AI/ML',
         github: '#',
         live: 'https://mlimi-smart1.vercel.app/'
@@ -55,7 +55,7 @@ app.get('/api/portfolio', (req, res) => {
         name: 'Virtual Story Generator',
         description: 'An AI-powered platform that creates personalized stories supporting multiple languages including Swahili, Chichewa, Kinyarwanda, Yao, and English.',
         technologies: ['Python', 'JavaScript', 'AI/ML'],
-        image: './Virtula_story.png',
+        image: '/Virtula_story.png',
         category: 'AI/ML',
         github: '#',
         live: 'https://virtual-story-generator.vercel.app/'
